@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <table width="500" border="1">
+        <tr>
+          <td align="right">歌名：</td>
+          <td>{{song[playNo].name}}</td>
+        </tr>
+        <tr>
+          <td align="right">歌名：</td>
+          <td>{{song[playNo].article}}</td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <button @click="prev">上一首</button>
+            <audio
+              autoplay="true"
+              controls="controls"
+              :src="song[playNo].url"
+            ></audio>
+            <button @click="next">下一首</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    const songs = [
+      {
+        name: "Tik Tok",
+        article: "Kesha",
+        url: "http://m701.music.126.net/20221018105239/ec6cb76852ea3beca15339b3c28ed105/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/9041410581/5c4b/519e/d45c/5a355c70c45b9ed97693351bf7b50ec7.mp3",
+      },
+      {
+        name: "爱我别走",
+        article: "张震岳",
+        url: "http://m7.music.126.net/20221018105435/c62b132b235a2c49fa55f4090949322b/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/3859757632/cf3f/a608/6a63/0f8a6e0d3aa5fff8cedd623238de9593.mp3",
+      },
+      {
+        name: "月半小夜曲",
+        article: "李克勤",
+        url: "http://m8.music.126.net/20221018112233/22cc8023d82e81490217f3dc4342432a/ymusic/b614/eac8/7bf3/57d95bdd58c23c05c7bc087337f16f56.mp3",
+      },
+      {
+        name: "后来",
+        article: "刘若英",
+        url: "http://m801.music.126.net/20221018112304/2ea593e355877acb80947be51bff91f8/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/14785749430/ce13/cf92/dee8/8a0452ddd47cb39f58697b1b21f34360.mp3",
+      },
+      {
+        name: "别怕我伤心",
+        article: "张信哲",
+        url: "http://m8.music.126.net/20221018112337/4217bb6f06c3663e9ec8cb33757d35a1/ymusic/62a0/9fdf/4fab/dfa2bc276bca3cf4e76a4ef18e279106.mp3",
+      },
+    ];
+    Vue.config.productionTip = false;
+
+    // 创建Vue实例
+    new Vue({
+      el: "#root",
+      data: {
+        song: songs,
+        playNo: 0,
+      },
+      methods: {
+        prev() {
+          this.playNo = (this.playNo + this.song.length - 1) % this.song.length;
+        },
+        next() {
+          this.playNo = (this.playNo + 1) % this.song.length;
+        },
+      },
+    });
+  </script>
+</html>
